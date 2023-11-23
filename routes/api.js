@@ -15,13 +15,13 @@ router.post('/register', async function (req, res, next) {
     const { name, email, password } = req.body
 
     if (!name || !email || !password) {
-      res.status(400).json({ error: "fill all fields" })
+      res.status(200).json({ error: "fill all fields" })
     }
     else {
       const userExists = await User.findOne({ email })
       console.log(userExists, 'userExists');
       if (userExists) {
-        res.status(400).json({ error: "user already exists" })
+        res.status(200).json({ error: "user already exists" })
       }
       else {
         const salt = await bcrypt.genSalt(10);

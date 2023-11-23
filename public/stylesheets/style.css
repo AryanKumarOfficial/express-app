@@ -119,6 +119,13 @@ a.active {
   box-shadow: 0 0 10px 0 maroon;
 }
 
+#register form input[type="submit"]:disabled {
+  background: #ccc;
+  color: #fff;
+  box-shadow: 0 0 10px 0 maroon;
+cursor: not-allowed;
+}
+
 #register form h3 {
   margin-bottom: 1rem;
   font-size: 2rem;

@@ -13,10 +13,27 @@ links.forEach(function (link) {
 
 // Register logic 
 let form = document.getElementById('registerForm');
+const registerBtn = document.getElementById('registerButton');
 const nameInput = document.getElementById('rname');
 const emailInput = document.getElementById('remail');
 const passwordInput = document.getElementById('rpassword');
 const confirmPasswordInput = document.getElementById('rcpassword');
+const errorElement = document.getElementById('passwordError');
+let disable = false;
+const checkPassword = () => {
+    if (passwordInput.value === confirmPasswordInput.value) {
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+        registerBtn.disabled = false;
+    }
+    else {
+        errorElement.textContent = 'Password does not match';
+        errorElement.style.display = 'block';
+        errorElement.style.color = 'red';
+        registerBtn.disabled = true;
+    }
+}
+
 nameInput.addEventListener('change', (e) => {
     nameInput.value = e.target.value
 })
@@ -31,7 +48,13 @@ passwordInput.addEventListener('change', (e) => {
 
 confirmPasswordInput.addEventListener('change', (e) => {
     confirmPasswordInput.value = e.target.value
+
 })
+
+confirmPasswordInput.addEventListener('input', (e) => {
+    checkPassword()
+})
+
 
 const handleRegister = async (e) => {
     e.preventDefault();
@@ -51,7 +74,11 @@ const handleRegister = async (e) => {
             body: JSON.stringify(formData)
         })
         const data = await res.json()
-        console.log(data, 'data');
+        if (data?.success) {
+            localStorage.setItem('token', data.authToken)
+            window.history.back()
+            alert('Registration Successful')
+        }
     }
     nameInput.value = ''
     emailInput.value = ''

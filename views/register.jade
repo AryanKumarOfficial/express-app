@@ -1,0 +1,25 @@
+extends layout 
+
+
+block content 
+    h1= title 
+    p Welcome to #{title}
+    p #{message}
+    section#register 
+        form
+            H3 Register
+            div
+            label(for='name') Full Name:
+            input(type='text', name='name')#name
+            div
+            label(for='email') Email:
+            input(type='email', name='Email')#email
+            div
+            label(for='password') Password:
+            input(type='password', name='password' autocomplete='new-password')#password
+            div
+            label(for='cpassword') Confirm Password:
+            input(type='password', name='cpassword' autocomplete='new-password')#cpassword
+            div
+            input(type='submit', value='Submit')
+        

@@ -13,11 +13,13 @@ html
           li
             a(href='/about') About
           li
-            a(href='/contac') Contact 
+            a(href='/contact') Contact 
           li 
             a(href="/register") Register
           li
             a(href="/login") Login
     main 
       block content
+    footer(style='background:black;color:white;padding:10px;text-align:center;font-weight:bold;margin-top:10px;')
+      p &copy; 2018 - #{new Date().getFullYear()} All Rights Reserved
     script(src="/javascripts/script.js") 

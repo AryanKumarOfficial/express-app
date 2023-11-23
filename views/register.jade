@@ -6,20 +6,20 @@ block content
     p Welcome to #{title}
     p #{message}
     section#register 
-        form
+        form(method='POST')#registerForm
             H3 Register
             div
             label(for='name') Full Name:
-            input(type='text', name='name')#name
+            input(type='text', name='name' required)#rname
             div
             label(for='email') Email:
-            input(type='email', name='Email')#email
+            input(type='email', name='Email' required)#remail
             div
             label(for='password') Password:
-            input(type='password', name='password' autocomplete='new-password')#password
+            input(type='password', name='password' autocomplete='new-password' required)#rpassword
             div
             label(for='cpassword') Confirm Password:
-            input(type='password', name='cpassword' autocomplete='new-password')#cpassword
+            input(type='password', name='cpassword' autocomplete='new-password' required)#rcpassword
             div
-            input(type='submit', value='Submit')
+            input(type='submit', value='Submit')#registerButton
         

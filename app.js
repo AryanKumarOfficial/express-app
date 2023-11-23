@@ -6,8 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var apiRoutes = require('./routes/api');
+const connectDB = require('./connectdb');
 
 var app = express();
+connectDB();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

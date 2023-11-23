@@ -3,5 +3,21 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
   body
-    block content
+    header
+      nav
+        ul#navItems
+          li
+            a(href='/') Home
+          li
+            a(href='/about') About
+          li
+            a(href='/contac') Contact 
+          li 
+            a(href="/register") Register
+          li
+            a(href="/login") Login
+    main 
+      block content
+    script(src="/javascripts/script.js") 

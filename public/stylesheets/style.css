@@ -1,8 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  padding: 50px;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+main {
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+
+
+}
+
+header {
+  margin-bottom: 20px;
+  background: #000;
+  color: #fff;
+}
+
+nav {
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex start */
+  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: x-large;
+  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out .3s;
+}
+
+nav ul li a:hover {
+  color: #ccc;
+}
+
+a.active {
+  background: maroon;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  /* You can add additional styles for emphasis */
 }

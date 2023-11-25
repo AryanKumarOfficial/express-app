@@ -231,7 +231,7 @@ router.post('/addnote', async function (req, res, next) {
         const note = new Note({
           category: category === 'default' ? 'General' : category,
           title,
-          content,
+          desc: content,
           user: user.user.id
         })
         await (await note.save())
@@ -260,7 +260,7 @@ router.post('/getnotes', async function (req, res, next) {
     else {
       const user = jwt.verify(authToken, process.env.JWT_SECRET);
       if (user) {
-        const notes = await Note.find({ user: user.user.id });
+        const notes = await Note.find({ user: user.user.id }).sort({ date: -1 });
         success = true;
         res.json({ notes, success })
       }
@@ -275,6 +275,216 @@ router.post('/getnotes', async function (req, res, next) {
   }
 }
 )
+
+router.post('/getnotesbycategory', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, category } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const notes = await Note.find({ user: user.user.id, category }).sort({ date: -1 });
+        success = true;
+        res.json({ notes, success })
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+})
+
+router.post('/getnotesbyid', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, id } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const note = await Note.findById(id);
+        success = true;
+        res.json({ note, success })
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+})
+
+router.post('/updatenote', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, id, category, title, content } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const note = await Note.findById(id);
+        if (note) {
+          const update = await Note.findByIdAndUpdate(id, {
+            category: category === 'default' ? 'General' : category,
+            title,
+            desc: content
+          })
+          success = true;
+          res.json({ note: update, success })
+        }
+        else {
+          res.status(401).json({ error: "invalid id", success })
+        }
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+}
+
+)
+
+router.post('/deletenote', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, id } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const note = await Note.findById(id);
+        if (note) {
+          const del = await Note.findByIdAndDelete(id);
+          success = true;
+          res.json({ note: del, success })
+        }
+        else {
+          res.status(401).json({ error: "invalid id", success })
+        }
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+}
+
+)
+
+router.get('/getallnotes', async function (req, res, next) {
+  let success = false;
+  try {
+    const notes = await Note.find();
+    success = true;
+    res.json({ notes, success })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+})
+
+router.post('/getnotesbysearch', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, search } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const notes = await Note.find({ user: user.user.id, title: { $regex: search, $options: 'i' } }).sort({ date: -1 });
+        success = true;
+        res.json({ notes, success })
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+}
+)
+
+router.post('/getnotesbycategoryandsearch', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, category, search } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+        const notes = await Note.find({ user: user.user.id, category, title: { $regex: search, $options: 'i' } }).sort({ date: -1 });
+        success = true;
+        res.json({ notes, success })
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+})
+
+router.post('/getfewnotes', async function (req, res, next) {
+  let success = false;
+  try {
+    const { authToken, limit } = req.body;
+    if (!authToken) {
+      res.status(200).json({ error: "no token" })
+    }
+    else {
+      const user = jwt.verify(authToken, process.env.JWT_SECRET);
+      if (user) {
+
+        const notes = await Note.find({ user: user.user.id }).sort({ date: -1 }).limit(limit);
+        success = true;
+        res.json({ notes, success })
+      }
+      else {
+        res.status(401).json({ error: "invalid token", success })
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ response: "server error", error, success })
+
+  }
+})
 
 
 module.exports = router;

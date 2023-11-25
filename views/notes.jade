@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div(class="text-justify").d-flex.justify-content-start.flex-wrap.my-auto.mx-auto.ps-5#notescontainer
+    //- div 
+    //-     .card(style="width: 18rem;").border-0.shadow.m-4
+    //-         .card-body.d-flex.flex-column
+    //-             h5.card-title.fw-bold.fs-4.text-capitalize#title Card title
+    //-             p.card-text#body Some quick example text to build on the card title and make up the bulk of the card's content.
+    //-             blockquote.blockquote
+    //-                 footer.blockquote-footer.text-end catrgory
+    //-             .d-flex.justify-content-between.mt-auto.pt-2.pb-2.border-1.border-dark.rounded.border-bottom-0.mx-2
+    //-                 a.btn.btn-danger(href="#").w-50.mx-1 
+    //-                     i(class="fa-solid fa-trash fa-lg")
+    //-                 a.btn.btn-primary(href="#").w-50.mx-1
+    //-                     //- i(class="fa-solid fa-edit fa-lg")
+    //-                     i(class="fa-solid fa-file-pen fa-lg").mx-auto
+
+    script(src="/javascripts/notes.js") 
+    

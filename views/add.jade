@@ -1,0 +1,28 @@
+section#add 
+    .container
+        .row
+        .col-md-6.offset-md-3
+            .card
+                .card-header
+                    h3.mb-0.text-center Add Note
+                .card-body
+                form()#addForm.needs-validation
+                    .form-group.p-4
+                        label(for='category') Category 
+                        select(required)#category.form-select
+                            option(value='default') Select Category
+                            option(value='work') Work
+                            option(value='personal') Personal
+                            option(value='ideas') Ideas
+                            option(value='random') Random
+                            option(value="other") Other
+                    .form-group.p-4
+                        label(for='title') Title
+                        input(type='text', placeholder='Enter title' required)#title.form-control
+                        div.valid-feedback Looks good!
+                    .form-group.p-4
+                        label(for='body') Body
+                        textarea#body.form-control(rows='4', placeholder='Enter body' required)
+                    .d-grid.gap-2
+                        button(type='submit')#addBtn.btn.btn-primary.btn-lg.m-4 Add Note
+script(src="/javascripts/add.js") 

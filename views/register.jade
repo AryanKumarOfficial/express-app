@@ -23,4 +23,8 @@ block content
             p(style='text-align:left;width:100vh;')#passwordError
             div
             input(type='submit', value='Submit')#registerButton
-        
+            div#registerMessage
+                p Already have an account?
+                a(href='/login') Login
+
+    script(src='/javascripts/register.js')    

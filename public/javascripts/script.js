@@ -1,90 +1,81 @@
 console.log('Hello from script.js');
 let currentUrl = window.location.pathname;
-
-// Get all the anchor elements
+// import Toastify from 'toastify-js';
+// Highlight active link
 let links = document.querySelectorAll('a');
 
-// Loop through each link and check if its href matches the current URL
 links.forEach(function (link) {
     if (link.getAttribute('href') === currentUrl) {
-        link.classList.add('active'); // Add the 'active' class to the matching link
+        link.classList.add('active');
     }
 });
 
-// Register logic 
-let form = document.getElementById('registerForm');
-const registerBtn = document.getElementById('registerButton');
-const nameInput = document.getElementById('rname');
-const emailInput = document.getElementById('remail');
-const passwordInput = document.getElementById('rpassword');
-const confirmPasswordInput = document.getElementById('rcpassword');
-const errorElement = document.getElementById('passwordError');
-let disable = false;
-const checkPassword = () => {
-    if (passwordInput.value === confirmPasswordInput.value) {
-        errorElement.textContent = '';
-        errorElement.style.display = 'none';
-        registerBtn.disabled = false;
-    }
-    else {
-        errorElement.textContent = 'Password does not match';
-        errorElement.style.display = 'block';
-        errorElement.style.color = 'red';
-        registerBtn.disabled = true;
-    }
-}
+// Register logic
 
-nameInput.addEventListener('change', (e) => {
-    nameInput.value = e.target.value
-})
-
-emailInput.addEventListener('change', (e) => {
-    emailInput.value = e.target.value
-})
-
-passwordInput.addEventListener('change', (e) => {
-    passwordInput.value = e.target.value
-})
-
-confirmPasswordInput.addEventListener('change', (e) => {
-    confirmPasswordInput.value = e.target.value
-
-})
-
-confirmPasswordInput.addEventListener('input', (e) => {
-    checkPassword()
-})
+const authenticatedNav = document.getElementById('authenticated'); // Fix typo
+const unAuthenticatedNav = document.getElementById('unauthenticated'); // Fix typo
+const logoutButton = document.getElementById('logout');
 
 
-const handleRegister = async (e) => {
-    e.preventDefault();
-    let formData = { name: nameInput.value, email: emailInput.value, password: passwordInput.value, cpassword: confirmPasswordInput.value }
-
-    console.log('data', formData);
-    if (!nameInput.value || !emailInput.value || !passwordInput.value || !confirmPasswordInput.value) {
-        console.log('Fill all Details');
-    }
-    else {
-        console.log('Hello from handleRegister');
-        const res = await fetch('/api/register', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
+const logout = async () => {
+    const isAuthenticated = localStorage.getItem('token');
+    if (isAuthenticated) {
+        Swal.fire({
+            title: `<b style='font-size:3rem; color:black;'>Are you sure!</b>`,
+            html: `<strong style='color:red;font-size:1.5rem;'>You won't be able to take notes!</strong>`,
+            icon: 'warning',
+            showConfirmButton: true,
+            confirmButtonText: 'Logout',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+            // reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('token');
+                Swal.fire({
+                    title: `<b style='font-size:2rem; color:green;'>Logged out Successfully!</b>`,
+                    icon: 'success',
+                    confirmButtonText: 'Continue',
+                    showConfirmButton: false,
+                    showCloseButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    window.location.replace('/login');
+                })
+            }
+            else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    title: `<b style='font-size:2rem; color:red;'>Cancelled!</b>`,
+                    icon: 'error',
+                    confirmButtonText: 'Continue',
+                    showConfirmButton: false,
+                    showCloseButton: false,
+                    timer: 1500,
+                })
+            }
         })
-        const data = await res.json()
-        if (data?.success) {
-            localStorage.setItem('token', data.authToken)
-            window.history.back()
-            alert('Registration Successful')
-        }
+        // localStorage.removeItem('token');
+        // window.location.replace('/');
     }
-    nameInput.value = ''
-    emailInput.value = ''
-    passwordInput.value = ''
-    confirmPasswordInput.value = ''
-
 }
 
-form.addEventListener('submit', handleRegister);
+if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
+}
+
+const checkAuth = () => {
+    const authToken = localStorage.getItem('token');
+    if (authToken) {
+        authenticatedNav.style.display = 'block';
+        unAuthenticatedNav.style.display = 'none';
+    } else {
+        authenticatedNav.style.display = 'none';
+        unAuthenticatedNav.style.display = 'block';
+    }
+}
+
+
+
+
+
+

@@ -57,7 +57,7 @@ router.post('/login', async function (req, res, next) {
     const { email, password } = req.body
 
     if (!email || !password) {
-      res.status(400).json({ error: "fill all fields" })
+      res.status(200).json({ success, error: "fill all fields" })
     }
 
     else {
@@ -80,11 +80,11 @@ router.post('/login', async function (req, res, next) {
 
         }
         else {
-          res.status(400).json({ error: "invalid credentials" })
+          res.status(401).json({ success, error: "invalid credentials" })
         }
       }
       else {
-        res.status(400).json({ error: "invalid credentials" })
+        res.status(401).json({ success, error: "invalid credentials" })
       }
     }
 

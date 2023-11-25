@@ -4,6 +4,7 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="shortcut icon", href="/images/favicon.ico", type="image/x-icon")
+    link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css")
   body
     header
       nav
@@ -14,12 +15,34 @@ html
             a(href='/about') About
           li
             a(href='/contact') Contact 
-          li 
-            a(href="/register") Register
-          li
-            a(href="/login") Login
+          div(style='display:flex;')#unauthenticated 
+            li 
+              a(href="/register") Register
+            li
+              a(href="/login") Login
+          div#authenticated  
+            li
+              button#logout Logout 
+
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        const user = localStorage.getItem('token');
+        const unauthenticated = document.getElementById('unauthenticated');  
+        const authenticated = document.getElementById('authenticated');  
+
+        if (user) {
+          unauthenticated.style.display = 'none';
+          authenticated.style.display = 'flex';
+        } else {
+          unauthenticated.style.display = 'flex';
+          authenticated.style.display = 'none';
+        }
+      })
     main 
       block content
     footer(style='background:black;color:white;padding:10px;text-align:center;font-weight:bold;margin-top:10px;')
       p &copy; 2018 - #{new Date().getFullYear()} All Rights Reserved
-    script(src="/javascripts/script.js") 
+    script(src="/javascripts/script.js")
+    script(type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js")
+    script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11")
+

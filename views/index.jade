@@ -2,4 +2,12 @@ extends layout
 
 block content
   h1 Home
-  h2  Welcome to iNotebook
+  h2 Welcome to iNotebook
+
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      const user = localStorage.getItem('token');
+      if (!user) {
+        window.location.href = '/login';
+      }
+    });

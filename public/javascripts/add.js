@@ -31,7 +31,9 @@ addForm.addEventListener('submit', async (e) => {
             showConfirmButton: false,
             showCloseButton: false,
             timer: 1500,
-        })
+        }).then(() => {
+            window.location.href = '/notes';
+        });
         addForm.reset();
     }
     else {

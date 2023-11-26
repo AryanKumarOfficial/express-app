@@ -7,6 +7,7 @@ const updateTag = document.querySelector("#ucategory");
 const confirmUpdateBtn = document.querySelector("#cupdatebtn");
 // get the note by id and fill the form
 
+let currentNoteId = null;
 const getNoteById = async (noteId) => {
     try {
         const res = await fetch("/api/getnotesbyid", {
@@ -19,6 +20,7 @@ const getNoteById = async (noteId) => {
         const data = await res.json();
         if (data.success) {
             console.log(data);
+            currentNoteId = noteId;
             updateTitle.value = data.note.title;
             updateBody.value = data.note.desc;
             updateTag.value = data.note.tag;
@@ -129,7 +131,7 @@ if (!authToken) {
         }
     };
 
-    const updateNote = async (noteId) => {
+    const updateNote = async () => {
         console.log('update clicked');
         try {
             const res = await fetch("/api/updatenote", {
@@ -137,7 +139,7 @@ if (!authToken) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ authToken: authToken, id: noteId, title: updateTitle.value, content: updateBody.value, category: updateTag.value }),
+                body: JSON.stringify({ authToken: authToken, id: currentNoteId, title: updateTitle.value, content: updateBody.value, category: updateTag.value }),
             });
             const data = await res.json();
             if (data.success) {

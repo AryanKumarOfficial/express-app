@@ -4,19 +4,36 @@ block content
   h1= title
   p Welcome to #{title}
   div(class="text-justify").d-flex.justify-content-start.flex-wrap.my-auto.mx-auto.ps-5#notescontainer
-    //- div 
-    //-     .card(style="width: 18rem;").border-0.shadow.m-4
-    //-         .card-body.d-flex.flex-column
-    //-             h5.card-title.fw-bold.fs-4.text-capitalize#title Card title
-    //-             p.card-text#body Some quick example text to build on the card title and make up the bulk of the card's content.
-    //-             blockquote.blockquote
-    //-                 footer.blockquote-footer.text-end catrgory
-    //-             .d-flex.justify-content-between.mt-auto.pt-2.pb-2.border-1.border-dark.rounded.border-bottom-0.mx-2
-    //-                 a.btn.btn-danger(href="#").w-50.mx-1 
-    //-                     i(class="fa-solid fa-trash fa-lg")
-    //-                 a.btn.btn-primary(href="#").w-50.mx-1
-    //-                     //- i(class="fa-solid fa-edit fa-lg")
-    //-                     i(class="fa-solid fa-file-pen fa-lg").mx-auto
+  
+  //- Modal
+  .modal.fade#staticBackdrop(data-bs-backdrop="static", data-bs-keyboard="false", tabindex="-1", aria-labelledby="staticBackdropLabel", aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h1.modal-title.fs-5#staticBackdropLabel Update Note
+          button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
+        .modal-body
+          form(action="/notes/update", method="POST")
+            input(type="hidden", name="id", id="id")
+            .mb-3
+              label(for="title" class="form-label") Title
+              input(type="text", class="form-control", id="utitle", name="title")
+            .mb-3
+              label(for="description" class="form-label") Description
+              textarea(class="form-control", id="udescription", name="description", rows="3")
+            //- also provide select and options to change the tags
+            .mb-3
+              label(for="tags") Category
+              select(class="form-select", id="ucategory", name="tags", aria-label="Default select example")
+                option(value="default") Select Tags
+                option(value="personal") Personal
+                option(value="work") Work
+                option(value="ideas") Ideas
+                option(value="quotes") Quotes
+                option(value="random") Random
+                option(value="others") Others
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Cancel
+          button.btn.btn-primary(type="button" id='cupdatebtn') Update
 
-    script(src="/javascripts/notes.js") 
-    
+  script(src="/javascripts/notes.js")

@@ -339,7 +339,7 @@ router.post('/updatenote', async function (req, res, next) {
         const note = await Note.findById(id);
         if (note) {
           const update = await Note.findByIdAndUpdate(id, {
-            category: category === 'default' ? 'General' : category,
+            tag: category === 'default' ? 'General' : category,
             title,
             desc: content
           })

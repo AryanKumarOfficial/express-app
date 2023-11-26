@@ -32,7 +32,7 @@ const getNoteById = async (noteId) => {
 
 
 if (!authToken) {
-    window.location.href = "/login.html";
+    window.location.href = "/login";
 } else {
     const getNotes = async () => {
         try {
@@ -94,7 +94,7 @@ if (!authToken) {
                     confirmUpdateBtn.addEventListener("click", () => updateNote(updateBtn.dataset.noteId));
                 });
             } else {
-                window.location.href = "/login.html";
+                window.location.href = "/login";
             }
         } catch (error) {
             console.log(error);

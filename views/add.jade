@@ -13,6 +13,7 @@ section#add
                             option(value='default') Select Category
                             option(value='work') Work
                             option(value='personal') Personal
+                            option(value="study") Study
                             option(value='ideas') Ideas
                             option(value='random') Random
                             option(value="other") Other
@@ -21,8 +22,23 @@ section#add
                         input(type='text', placeholder='Enter title' required)#title.form-control
                         div.valid-feedback Looks good!
                     .form-group.p-4
-                        label(for='body') Body
-                        textarea#body.form-control(rows='4', placeholder='Enter body' required)
+                        label(for='BodyType') Description Type
+                        select(required)#BodyType.form-select
+                            option(value='text') Default
+                            option(value='text') Text
+                            option(value='time') Time
+                    .form-group.p-4#timeSection
+                        label(for='time') Time
+                        .duration-input#time
+                        input#hoursInput(type="number", placeholder="HH", min="0")
+                        span :
+                        input#minutesInput(type="number", placeholder="MM", min="0", max="59")
+                        span :
+                        input#secondsInput(type="number", placeholder="SS", min="0", max="59")
+                        p#output
+                    .form-group.p-4
+                        label(for='body') Description
+                        textarea#body.form-control(rows='4', placeholder='Enter Description' required)
                     .d-grid.gap-2
                         button(type='submit')#addBtn.btn.btn-primary.btn-lg.m-4 Add Note
 script(src="/javascripts/add.js") 

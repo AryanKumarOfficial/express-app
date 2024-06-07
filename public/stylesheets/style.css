@@ -4,7 +4,6 @@
 }
 
 body {
-  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -13,7 +12,6 @@ main {
   margin-left: 50px;
   margin-right: 50px;
   min-height: 100vh;
-
 }
 
 header {
@@ -57,8 +55,6 @@ nav ul {
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
-  /* flex start */
-  justify-content: center;
   justify-content: flex-end;
   align-items: center;
 }
@@ -74,7 +70,6 @@ nav ul li a {
   font-weight: bold;
   font-size: x-large;
   transition: all ease-in-out 0.3s;
-  transition: all ease-in-out .3s;
 }
 
 nav ul li a:hover {
@@ -88,7 +83,6 @@ nav ul li button {
   font-weight: bold;
   font-size: x-large;
   transition: all ease-in-out 0.3s;
-  transition: all ease-in-out .3s;
   background: none;
   border: none;
   cursor: pointer;
@@ -103,7 +97,6 @@ a.active:not(.logoLink) {
   border: none;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  /* You can add additional styles for emphasis */
 }
 
 /* registration page */
@@ -134,7 +127,6 @@ a.active:not(.logoLink) {
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
-
 
 #register form input:focus {
   outline: none;
@@ -214,13 +206,11 @@ a.active:not(.logoLink) {
   height: 4px;
   background: maroon;
   transition: width 0.3s ease-in-out;
-
 }
 
 #registerMessage a:hover::after {
   width: 100%;
 }
-
 
 /* login page */
 
@@ -237,7 +227,6 @@ a.active:not(.logoLink) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 50%; */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   width: 50%;
   margin: 0 2rem;
@@ -249,10 +238,8 @@ a.active:not(.logoLink) {
   padding: 1rem;
   width: 100%;
   border: 1px solid #ccc;
-  /* color: green; */
   border-radius: 0.5rem;
 }
-
 
 #login form input:focus {
   outline: none;
@@ -332,7 +319,6 @@ a.active:not(.logoLink) {
   height: 4px;
   background: maroon;
   transition: width 0.3s ease-in-out;
-
 }
 
 #loginMessage a:hover::after {
@@ -351,4 +337,78 @@ a.active:not(.logoLink) {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.duration-input {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.duration-input input {
+  width: 60px;
+}
+
+.duration-input input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 10px 0 maroon;
+}
+
+/* remove the updown arrow from the input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+label {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.duration-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.duration-input input {
+  width: 60px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.duration-input input:focus {
+  outline: none;
+  border: 1px solid maroon;
+}
+
+
+.duration-input input::placeholder {
+  font-size: 1em;
+  color: green;
+  text-align: center;
+}
+
+
+
+.duration-input span {
+  font-size: 1.2em;
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#timeSection {
+  display: none;
 }

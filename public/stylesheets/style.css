@@ -24,6 +24,33 @@ header {
 
 nav {
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.logo a {
+  text-decoration: none;
+}
+
+div.logo h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(90deg, red, blue, gray);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 300% 300%;
+  animation: grandient 4s ease-in-out infinite;
 }
 
 nav ul {
@@ -310,4 +337,18 @@ a.active {
 
 #loginMessage a:hover::after {
   width: 100%;
+}
+
+@keyframes grandient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }

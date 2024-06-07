@@ -43,7 +43,7 @@ div.logo h1 {
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(90deg, red, blue, gray);
+  background: linear-gradient(90deg, maroon, gray, blue);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -411,4 +411,42 @@ label {
 
 #timeSection {
   display: none;
+}
+
+#utimeSection {
+  display: none;
+}
+
+#timeSection label {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+#timeSection input {
+  width: 60px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+#timeSection input:focus {
+  outline: none;
+  border: 1px solid maroon;
+}
+
+#timeSection input::placeholder {
+  font-size: 1em;
+  color: green;
+  text-align: center;
+}
+
+#timeSection span {
+  font-size: 1.2em;
+}
+
+#utimeSection p {
+  font-size: 1.2em;
+  margin-top: 20px;
 }

@@ -5,7 +5,38 @@ const updateTitle = document.querySelector("#utitle");
 const updateBody = document.querySelector("#udescription");
 const updateTag = document.querySelector("#ucategory");
 const confirmUpdateBtn = document.querySelector("#cupdatebtn");
+const uhoursInput = document.querySelector("#uhoursInput");
+const uminutesInput = document.querySelector("#uminutesInput");
+const usecondsInput = document.querySelector("#usecondsInput");
+const uoutput = document.querySelector("#uoutput");
+const uBodyType = document.querySelector("#uBodyType");
+const utimeSection = document.querySelector("#utimeSection");
 // get the note by id and fill the form
+
+
+uhoursInput.addEventListener("input", updateTime);
+uminutesInput.addEventListener("input", updateTime);
+usecondsInput.addEventListener("input", updateTime);
+
+function updateTime() {
+    const uHours = parseInt(uhoursInput.value) || 0;
+    const uMinutes = parseInt(uminutesInput.value) || 0;
+    const uSeconds = parseInt(usecondsInput.value) || 0;
+
+    if (uHours < 0 || uMinutes < 0 || uSeconds < 0) {
+        uoutput.textContent = "Please enter a valid time";
+        return;
+
+    }
+    uoutput.textContent = `${uHours} hours ${uMinutes} minutes ${uSeconds} seconds`;
+}
+
+
+uBodyType.addEventListener("input", (e) => {
+    if (e.target.value === 'time') {
+        utimeSection.style.display = 'block';
+    }
+});
 
 let currentNoteId = null;
 const getNoteById = async (noteId) => {
@@ -24,6 +55,11 @@ const getNoteById = async (noteId) => {
             updateTitle.value = data.note.title;
             updateBody.value = data.note.desc;
             updateTag.value = data.note.tag;
+            uBodyType.value = data.note.type;
+            uhoursInput.value = data.note.hours;
+            uminutesInput.value = data.note.minutes;
+            usecondsInput.value = data.note.seconds;
+            updateTime();
         }
     } catch (error) {
         console.log(error);

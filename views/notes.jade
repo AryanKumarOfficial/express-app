@@ -16,13 +16,6 @@ block content
           form(action="/notes/update", method="POST")
             input(type="hidden", name="id", id="id")
             .mb-3
-              label(for="title" class="form-label") Title
-              input(type="text", class="form-control", id="utitle", name="title")
-            .mb-3
-              label(for="description" class="form-label") Description
-              textarea(class="form-control", id="udescription", name="description", rows="3")
-            //- also provide select and options to change the tags
-            .mb-3
               label(for="tags") Category
               select(class="form-select", id="ucategory", name="tags", aria-label="Default select example")
                 option(value="default") Select Tags
@@ -33,6 +26,28 @@ block content
                 option(value="quotes") Quotes
                 option(value="random") Random
                 option(value="others") Others
+            .mb-3
+              label(for="title" class="form-label") Title
+              input(type="text", class="form-control", id="utitle", name="title")
+            .mb-3
+              label(for="uBodyType") Category Type
+              select(class="form-select", id="uBodyType", name="tags", aria-label="Default select example")
+                option(value="text") Default
+                option(value="text") Text
+                option(value="time") Time
+            .mb-3#utimeSection
+              label(for="time") Time
+              .duration-input#utime
+              input#uhoursInput(type="number", placeholder="HH", min="0")
+              span :
+              input#uminutesInput(type="number", placeholder="MM", min="0", max="59")
+              span :
+              input#usecondsInput(type="number", placeholder="SS", min="0", max="59")
+              p#uoutput
+            .mb-3
+              label(for="description" class="form-label") Description
+              textarea(class="form-control", id="udescription", name="description", rows="3")
+            //- also provide select and options to change the tags
         .modal-footer
           button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Cancel
           button.btn.btn-primary(type="button" id='cupdatebtn') Update

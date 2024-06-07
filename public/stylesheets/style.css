@@ -98,7 +98,7 @@ nav ul li button:hover {
   color: #ccc;
 }
 
-a.active {
+a.active:not(.logoLink) {
   background: maroon;
   border: none;
   padding: 0.5rem;

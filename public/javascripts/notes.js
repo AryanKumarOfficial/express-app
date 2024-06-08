@@ -33,10 +33,14 @@ function updateTime() {
 
 
 uBodyType.addEventListener("input", (e) => {
-    if (e.target.value === 'time') {
+    if (e.target.value == 'time') {
         utimeSection.style.display = 'block';
     }
+    else {
+        utimeSection.style.display = 'none';
+    }
 });
+
 
 let currentNoteId = null;
 const getNoteById = async (noteId) => {
@@ -55,7 +59,7 @@ const getNoteById = async (noteId) => {
             updateTitle.value = data.note.title;
             updateBody.value = data.note.desc;
             updateTag.value = data.note.tag;
-            uBodyType.value = data.note.BodyType;
+            uBodyType.value = data.note.bodyType;
             uhoursInput.value = data.note?.time?.hours;
             uminutesInput.value = data.note?.time?.minutes;
             usecondsInput.value = data.note?.time?.seconds;
@@ -103,9 +107,12 @@ if (!authToken) {
                             <div class="border-0 shadow m-4">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title fw-bold fs-4 text-capitalize" id="title">${note.title}</h5>
+                                    <h5 class="card-title fw-bold fs-5 text-secondary text-capitalize" id="title">${note.tag}</h5>
                                     <p class="card-text" id="body">${note.desc}</p>
+                                    <p class="card-text text-success" id="body">${note?.time?.hours + " : " + note?.time?.minutes + " : " + note?.time?.seconds}</p>
                                     <blockquote class="blockquote">
-                                        <footer class="blockquote-footer text-end">${note.tag}</footer>
+                                        <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.date)).toDateString()}</footer>
+                                        <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.date)).toLocaleTimeString()}</footer>
                                     </blockquote>
                                     <div class="d-flex justify-content-between mt-auto pt-2 pb-2 border-1 border-dark rounded border-bottom-0 mx-2">
                                         <button class="btn btn-danger w-50 mx-1 deleteBtn" data-note-id="${note._id}">
@@ -124,7 +131,10 @@ if (!authToken) {
                     // Add event listener inside the loop
                     const deleteBtn = noteDiv.querySelector(".deleteBtn");
                     const updateBtn = noteDiv.querySelector(".updateBtn");
-                    updateBtn.addEventListener("click", () => getNoteById(note._id));
+                    updateBtn.addEventListener("click", () => {
+                        uBodyType.value == 'time' ? utimeSection.style.display = 'block' : utimeSection.style.display = 'none';
+                        getNoteById(note._id);
+                    });
                     console.log(updateBtn.dataset.noteId);
                     deleteBtn.addEventListener("click", () => handleDelete(note._id));
                     confirmUpdateBtn.addEventListener("click", () => updateNote(updateBtn.dataset.noteId));
@@ -175,7 +185,7 @@ if (!authToken) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ authToken: authToken, id: currentNoteId, title: updateTitle.value, content: updateBody.value, category: updateTag.value }),
+                body: JSON.stringify({ authToken: authToken, id: currentNoteId, title: updateTitle.value, content: updateBody.value, category: updateTag.value, bodyType: uBodyType.value, time: { hours: parseInt(uhoursInput.value) || 0, minutes: parseInt(uminutesInput.value) || 0, seconds: parseInt(usecondsInput.value) || 0 } }),
             });
             const data = await res.json();
             if (data.success) {

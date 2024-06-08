@@ -409,20 +409,20 @@ label {
   color: #333;
 }
 
-#timeSection {
-  display: none;
-}
-
+#timeSection,
 #utimeSection {
   display: none;
 }
 
-#timeSection label {
+
+#timeSection label,
+#utimeSection label {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
-#timeSection input {
+#timeSection input,
+#utimeSection input {
   width: 60px;
   padding: 10px;
   font-size: 1em;
@@ -431,22 +431,20 @@ label {
   text-align: center;
 }
 
-#timeSection input:focus {
+#timeSection input:focus,
+#utimeSection input:focus {
   outline: none;
   border: 1px solid maroon;
 }
 
-#timeSection input::placeholder {
+#timeSection input::placeholder,
+#utimeSection input::placeholder {
   font-size: 1em;
   color: green;
   text-align: center;
 }
 
-#timeSection span {
+#timeSection span,
+#utimeSection span {
   font-size: 1.2em;
-}
-
-#utimeSection p {
-  font-size: 1.2em;
-  margin-top: 20px;
 }

@@ -34,6 +34,10 @@ const noteSchema = new mongoose.Schema({
             type: Number,
             default: 0
         }
+    },
+    bodyType: {
+        type: String,
+        default: "text"
     }
 }, { timestamps: true })
 

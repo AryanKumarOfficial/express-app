@@ -53,7 +53,8 @@ addForm.addEventListener('submit', async (e) => {
     time.hours = parseInt(time.hours);
     time.minutes = parseInt(time.minutes);
     time.seconds = parseInt(time.seconds);
-    const data = { category, title, content, authToken, time };
+    const bodyType = bodySelect.value;
+    const data = { category, title, content, authToken, time, bodyType };
     console.log(data, 'data');
     const res = await fetch('/api/addnote', {
         method: 'POST',

@@ -55,10 +55,10 @@ const getNoteById = async (noteId) => {
             updateTitle.value = data.note.title;
             updateBody.value = data.note.desc;
             updateTag.value = data.note.tag;
-            uBodyType.value = data.note.type;
-            uhoursInput.value = data.note.hours;
-            uminutesInput.value = data.note.minutes;
-            usecondsInput.value = data.note.seconds;
+            uBodyType.value = data.note.BodyType;
+            uhoursInput.value = data.note?.time?.hours;
+            uminutesInput.value = data.note?.time?.minutes;
+            usecondsInput.value = data.note?.time?.seconds;
             updateTime();
         }
     } catch (error) {

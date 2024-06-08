@@ -221,8 +221,8 @@ router.post('/addnote', async function (req, res, next) {
   let success = false;
   try {
 
-    const { category, title, content, authToken, time } = req.body;
-    if (!category || !title || !content || !authToken || !time) {
+    const { category, title, content, authToken, time, bodyType } = req.body;
+    if (!category || !title || !content || !authToken || !time || !bodyType) {
       res.status(200).json({ error: "fill all fields" })
     }
     else {
@@ -233,7 +233,8 @@ router.post('/addnote', async function (req, res, next) {
           title,
           desc: content,
           user: user.user.id,
-          time: time
+          time: time,
+          bodyType
         })
         await (await note.save())
         success = true;
@@ -330,7 +331,7 @@ router.post('/getnotesbyid', async function (req, res, next) {
 router.post('/updatenote', async function (req, res, next) {
   let success = false;
   try {
-    const { authToken, id, category, title, content, time } = req.body;
+    const { authToken, id, category, title, content, time, bodyType } = req.body;
     if (!authToken) {
       res.status(200).json({ error: "no token" })
     }
@@ -343,7 +344,8 @@ router.post('/updatenote', async function (req, res, next) {
             tag: category === 'default' ? 'General' : category,
             title,
             desc: content,
-            time
+            time,
+            bodyType
           })
           success = true;
           res.json({ note: update, success })

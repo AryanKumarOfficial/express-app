@@ -62,8 +62,8 @@ const renderNotes = async () => {
                         <p class="card-text" id="body">${note.desc}</p>
                         <p class="card-text text-success" id="body">${note?.time?.hours + " : " + note?.time?.minutes + " : " + note?.time?.seconds}</p>
                         <blockquote class="blockquote">
-                            <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.date)).toDateString()}</footer>
-                            <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.date)).toLocaleTimeString()}</footer>
+                            <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.updatedAt)).toDateString()}</footer>
+                            <footer class="fs-6 fw-light fst-italic text-end">${(new Date(note.updatedAt)).toLocaleTimeString()}</footer>
                         </blockquote>
                         <div class="d-flex justify-content-between mt-auto pt-2 pb-2 border-1 border-dark rounded border-bottom-0 mx-2">
                             <button class="btn btn-danger w-50 mx-1 deleteBtn" data-note-id="${note._id}">
